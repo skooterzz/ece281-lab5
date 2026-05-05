@@ -39,7 +39,16 @@ end controller_fsm;
 
 architecture FSM of controller_fsm is
 
+
 begin
 
-
+adv_process : process(i_adv)
+	begin
+		if i_reset = '1' then
+			o_cycle <= "0001";
+		elsif rising_edge(i_clk) then
+			o_cycle <= o_cycle_next;
+		end if;
+	end process adv_process;
+	
 end FSM;
