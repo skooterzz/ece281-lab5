@@ -87,4 +87,7 @@ o_flags(0) <= not(w_ALU_result(7) or w_ALU_result(6) or w_ALU_result(5) or w_ALU
 -- negative flag -> look @ MSB to see if its 1 or 0 (neg or pos)
 o_flags(3) <= w_ALU_result(7);
 
+--o_flags(1) <= carryout 
+
+-- o_flags(2) <= overflow
 end Behavioral;
