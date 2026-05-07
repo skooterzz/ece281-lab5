@@ -1,22 +1,4 @@
-----------------------------------------------------------------------------------
--- Company: 
--- Engineer: 
--- 
--- Create Date: 04/18/2025 02:42:49 PM
--- Design Name: 
--- Module Name: controller_fsm - FSM
--- Project Name: 
--- Target Devices: 
--- Tool Versions: 
--- Description: 
--- 
--- Dependencies: 
--- 
--- Revision:
--- Revision 0.01 - File Created
--- Additional Comments:
--- 
-----------------------------------------------------------------------------------
+
 
 
 library IEEE;
@@ -39,15 +21,16 @@ end controller_fsm;
 
 architecture FSM of controller_fsm is
 
+signal w_o_cycle : STD_LOGIC_VECTOR (3 downto 0);
 
 begin
 
 adv_process : process(i_adv)
 	begin
 		if i_reset = '1' then
-			o_cycle <= "0001";
+			w_o_cycle <= "0001";
 		elsif rising_edge(i_clk) then
-			o_cycle <= o_cycle_next;
+			W_o_cycle <= o_cycle_next;
 		end if;
 	end process adv_process;
 	
