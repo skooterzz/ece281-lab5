@@ -70,7 +70,7 @@ begin
     port map(
         A     => A(4),
         B     => B(4),
-        Cin   => w_carry(3)   -- Directly to input here
+        Cin   => w_carry(3),  -- Directly to input here
         S     => S(4),
         Cout  => w_carry(4)
     );

@@ -20,18 +20,31 @@ entity controller_fsm is
 end controller_fsm;
 
 architecture FSM of controller_fsm is
+    type state_of_fsm is (clearDisp, LoadA, LoadB, dispResult);
+    signal f_Q, f_Q_next : state_of_fsm;
 
 signal w_o_cycle : STD_LOGIC_VECTOR (3 downto 0);
 
 begin
 
-adv_process : process(i_adv)
+f_Q_next <= LoadA when (f_Q = clearDisp) else
+            LoadB when (f_Q = LoadA) else
+            dispResult when (f_Q = LoadB) else
+            clearDisp when (f_Q = dispResult);
+
+with f_Q select
+    o_cycle <= "0001" when clearDisp,
+                "0010" when LoadA,
+                "0100" when LoadB,
+                "1000" when dispResult;
+                
+process(i_adv)
 	begin
 		if i_reset = '1' then
-			w_o_cycle <= "0001";
-		elsif rising_edge(i_clk) then
-			W_o_cycle <= o_cycle_next;
+			f_Q <= clearDisp;
+		elsif rising_edge(i_adv) then
+			f_Q <= f_Q_next;
 		end if;
-	end process adv_process;
+	end process;
 	
 end FSM;
